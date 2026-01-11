@@ -1,0 +1,47 @@
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+.env
+.env.*.local
+
+# Logs
+/logs
+*.log
+pids
+*.pid
+*.seed
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Build outputs
+/dist
+/build
+
+# OneDrive temp/lock files
+~$*
+~*.tmp
+
+# Optional npm cache
+.npm
+
+# Socket storage
+/sockets
+
+/backend/node_modules
+/frontend/node_modules
+/frontend/build
+/frontend/.env
+/backend/.env

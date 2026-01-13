@@ -99,11 +99,15 @@ const hireBid = async (req, res) => {
         try {
             const freelancer = updatedBid.freelancerId;
             const freelancerId = freelancer && (freelancer._id ? freelancer._id.toString() : freelancer.toString());
+            console.log('Attempting to emit hired event to freelancer:', freelancerId);
             if (freelancerId) {
-                emitToUser(freelancerId, 'hired', { bid: updatedBid, gig: updatedGig || gig });
+                const emitted = emitToUser(freelancerId, 'hired', { bid: updatedBid, gig: updatedGig || gig });
+                console.log('Emit result:', emitted ? 'success' : 'failed - user not connected');
+            } else {
+                console.warn('No freelancerId found');
             }
         } catch (e) {
-            console.warn('Real-time notify failed', e);
+            console.error('Real-time notify failed', e);
         }
 
         res.status(200).json({ message: 'Bid hired successfully', bid: updatedBid, gig });

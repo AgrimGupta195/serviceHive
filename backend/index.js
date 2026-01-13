@@ -12,15 +12,16 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ['http://localhost:3000','http://localhost:5173']
+    origin: ['http://localhost:3000','http://localhost:5173'],
+    credentials: true
 }));
 
 const PORT = process.env.PORT || 5000;
 app.use('/api/auth',authRouter);
 app.use('/api/gigs',gigRouter);
 app.use('/api/bids',bidRouter);
-const server = app.listen(PORT, async () => {
-    console.log(`Server is running on port ${PORT}`);
+const server = app.listen(5000, async () => {
+    console.log(`Server is running on port ${5000}`);
     await connectDB();
 
     // initialize real-time sockets

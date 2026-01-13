@@ -20,7 +20,11 @@ export const initSocket = (userId) => {
   }
 
   console.log('Initializing socket connection...');
-  socket = io('http://localhost:5000', {
+  // Use the same base URL as axios, or fallback to localhost for development
+  const socketURL = import.meta.env.VITE_API_URL || 
+    (window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://servicehive-dyjv.onrender.com');
+  console.log('Connecting to socket at:', socketURL);
+  socket = io(socketURL, {
     withCredentials: true,
     transports: ['websocket', 'polling'],
   });

@@ -1,4 +1,6 @@
 import axios from "axios"
+import { store } from "../store/store"
+import { clearUser } from "../store/slices/authSlice"
 
 const axiosInstance = axios.create({
     baseURL:"https://servicehive-dyjv.onrender.com",
@@ -23,7 +25,13 @@ axiosInstance.interceptors.response.use(
                     break;
                 case 401:
                     console.error("Unauthorized:", data);
-                    // You could redirect to login page or refresh token here
+                    // Clear user state and redirect to login
+                    store.dispatch(clearUser());
+                    // Only redirect if not already on login/signup page
+                    if (!window.location.pathname.includes('/login') && 
+                        !window.location.pathname.includes('/signup')) {
+                        window.location.href = '/login';
+                    }
                     break;
                 case 403:
                     console.error("Forbidden:", data);

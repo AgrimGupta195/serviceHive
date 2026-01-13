@@ -7,5 +7,7 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    // Allow access via non-localhost hosts (e.g. Render preview/prod URLs)
+    allowedHosts: true,
   },
 })
